@@ -171,7 +171,7 @@ if __name__ == "__main__":
     for i in range(11, 20):
         mlist2.append(i)
 
-    print(mlist2.printall())          # TODO 打印后总是有个None，不知原因。
+    mlist2.printall()      # TODO 打印后总是有个None，不知原因。已解决：print了结果，该函数没有返回值，所以是None
     print('last:', mlist2.pop_last())
     print('first:', mlist2.pop())
 
