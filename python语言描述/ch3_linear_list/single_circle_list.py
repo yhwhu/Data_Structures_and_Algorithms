@@ -1,6 +1,6 @@
 # 循环单链表,尾结点rear指向表头。
 
-from ch3_linear_list.chained_list_a import LNode, ChainedListUnderFlow
+from ch3_linear_list.single_list import LNode, ChainedListUnderFlow
 
 
 class LCList:
@@ -21,12 +21,12 @@ class LCList:
             self._rear.next = p      # p此时是表头结点，更改rear的指向
 
     def append(self, elem):
-        p = LNode(elem, self._rear.next)  # 没有考虑空表的情况
-        self._rear.next = p
-        self._rear = p
+        # p = LNode(elem, self._rear.next)  # 没有考虑空表的情况
+        # self._rear.next = p
+        # self._rear = p
 
-        # self.prepend(elem)
-        # self._rear = self._rear.next
+        self.prepend(elem)
+        self._rear = self._rear.next
 
     def pop(self):
         if self._rear is None:
@@ -55,11 +55,10 @@ class LCList:
 
 if __name__ == "__main__":
     mlist3 = LCList()
-    for i in range(10):
+    for i in range(1, 10):
         mlist3.prepend(i)
     for i in range(11, 20):
         mlist3.append(i)
     mlist3.printall()
     print("pop:", mlist3.pop())
-
 

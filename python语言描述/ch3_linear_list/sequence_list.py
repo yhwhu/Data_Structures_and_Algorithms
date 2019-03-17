@@ -60,6 +60,15 @@ class List:
             self.elements[i], self.elements[j] = self.elements[j], self.elements[i]
             i, j = i + 1, j - 1
 
+    def list_sort(self):
+        for i in range(1, self.len()):
+            x = self.elements[i]
+            j = i
+            while j > 0 and self.elements[j - 1] > x:
+                self.elements[j] = self.elements[j - 1]
+                j -= 1
+            self.elements[j] = x
+
 
 if __name__ == "__main__":
     lst = List()
@@ -79,4 +88,7 @@ if __name__ == "__main__":
     # print(lst.del_i(i=10))
 
     lst.reverse()
+    print(lst.elements)
+
+    lst.list_sort()
     print(lst.elements)
