@@ -93,7 +93,8 @@ class LList:
                 print(', ', 'end')
             p = p.next 
         print('')
-        print('finish printing')
+        # print('finish printing')
+
     # 迭代器
     def elements(self):
         p = self._head
@@ -117,6 +118,44 @@ class LList:
             p = q
             self._head = self._head.next   # 前端删除
         self._head = p
+
+    # 练习题
+    def len(self):
+        count = 0
+        p = self._head
+        while p is not None:
+            count += 1
+            p = p.next
+        return count
+
+    def insert(self, elem, i):
+        if i < 1 or i > self.len():
+            raise ChainedListUnderFlow('in insert of LList')
+
+        q = LNode(elem)
+        if i == 1:
+            q.next = self._head
+            self._head = q
+        else:
+            p = self._head
+            for k in range(i-2):
+                p = p.next
+            q.next = p.next
+            p.next = q
+        return
+
+    def del_i(self, i):
+        if i < 1 or i > self.len():
+            raise ChainedListUnderFlow('in insert of LList')
+
+        if i == 1:
+            self._head = self._head.next
+        else:
+            p = self._head
+            for k in range(i-2):
+                p = p.next
+            p.next = p.next.next
+        return
 
 
 # 单链表的简单变动，增加一个尾结点,继承所有的非变动操作
@@ -171,6 +210,7 @@ class LList1(LList):
             p = q
         self._head = p
 
+    # 插入排序
     # 移动表中元素
     def sort1(self):
         if self._head is None:
@@ -228,25 +268,46 @@ if __name__ == "__main__":
     #
     # for x in mlist1.elements():
     #     print(x)
+    #
+    # mlist2 = LList1()
+    # mlist2.prepend(100)
+    # mlist2.prepend(200)
+    # for i in range(11, 20):
+    #     mlist2.append(i)
+    #
+    # mlist2.printall()      # TODO 打印后总是有个None，不知原因。已解决：print了结果，该函数没有返回值，所以是None
+    # print('last:', mlist2.pop_last())
+    # print('first:', mlist2.pop())
+    #
+    # for x in mlist2.filter(lambda y: y % 2 == 0):
+    #     print(x)
 
-    mlist2 = LList1()
-    mlist2.prepend(100)
-    mlist2.prepend(200)
-    for i in range(11, 20):
-        mlist2.append(i)
+    # mlist3 = LList1()
+    # for i in range(10):
+    #     mlist3.append(i)
+    # mlist3.reverse()
+    # print("")
+    # print("reverse:")
+    # mlist3.printall()
+    #
+    # mlist3.sort2()
+    # print("")
+    # print('sort2')
+    # mlist3.printall()
+    #
+    # mlist3.reverse()
+    # mlist3.sort1()
+    # print("")
+    # print("sort1")
+    # mlist3.printall()
 
-    mlist2.printall()      # TODO 打印后总是有个None，不知原因。已解决：print了结果，该函数没有返回值，所以是None
-    print('last:', mlist2.pop_last())
-    print('first:', mlist2.pop())
+    mlist4 = LList()
+    for i in range(10):
+        mlist4.append(i)
 
-    for x in mlist2.filter(lambda y: y % 2 == 0):
-        print(x)
+    mlist4.del_i(1)
+    mlist4.printall()
 
-    mlist2.reverse()
-    print("")
-    print("reverse:")
-    mlist2.printall()
-
-    mlist2.sort2()
-    print('sort2')
-    mlist2.printall()
+    print('')
+    mlist4.insert(100, 9)
+    mlist4.printall()
