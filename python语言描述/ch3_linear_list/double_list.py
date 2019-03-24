@@ -1,7 +1,6 @@
 # 双链表
 
-from ch3_linear_list.single_list import LNode, LList1, ChainedListUnderFlow
-
+from python语言描述.ch3_linear_list.single_list import LNode, LList1, ChainedListUnderFlow
 
 # 双链表结点类
 class DLNode(LNode):

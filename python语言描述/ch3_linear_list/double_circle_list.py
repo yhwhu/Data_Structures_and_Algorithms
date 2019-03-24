@@ -1,7 +1,7 @@
 # 循环双链表
 # 只需要一个首结点或尾结点即可都是O（1），不用像循环单链表巧妙地使用尾结点的结构
 
-from ch3_linear_list.double_list import DLNode, ChainedListUnderFlow
+from python语言描述.ch3_linear_list.double_list import DLNode, ChainedListUnderFlow
 
 
 class DLCList:

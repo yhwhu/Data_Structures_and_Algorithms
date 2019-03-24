@@ -1,6 +1,6 @@
 # 循环单链表,尾结点rear指向表头。
 
-from ch3_linear_list.single_list import LNode, ChainedListUnderFlow
+from python语言描述.ch3_linear_list.single_list import LNode, ChainedListUnderFlow
 
 
 class LCList:
