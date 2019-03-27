@@ -114,9 +114,9 @@ class LList:
         p = None
         while self._head is not None:
             q = self._head
+            self._head = self._head.next   # 前端删除
             q.next = p                     # 前端插入
             p = q
-            self._head = self._head.next   # 前端删除
         self._head = p
 
     # 练习题
@@ -195,7 +195,6 @@ class LList1(LList):
         p.next = None
         self._rear = p
         return e
-
     # pop不需要修改，因为是通过head判断表空，所以在0个，1个，几个数据情况下，仍然可以适用。
     # 0个就会报错；1个可以删除，但是表空，后续的其他操作都能检测出表空；多个正常删除，不影响rear
 
@@ -282,13 +281,13 @@ if __name__ == "__main__":
     # for x in mlist2.filter(lambda y: y % 2 == 0):
     #     print(x)
 
-    # mlist3 = LList1()
-    # for i in range(10):
-    #     mlist3.append(i)
-    # mlist3.reverse()
-    # print("")
-    # print("reverse:")
-    # mlist3.printall()
+    mlist3 = LList()
+    for i in range(10):
+        mlist3.append(i)
+    mlist3.reverse()
+    print("")
+    print("reverse:")
+    mlist3.printall()
     #
     # mlist3.sort2()
     # print("")
@@ -301,13 +300,13 @@ if __name__ == "__main__":
     # print("sort1")
     # mlist3.printall()
 
-    mlist4 = LList()
-    for i in range(10):
-        mlist4.append(i)
-
-    mlist4.del_i(1)
-    mlist4.printall()
-
-    print('')
-    mlist4.insert(100, 9)
-    mlist4.printall()
+    # mlist4 = LList()
+    # for i in range(10):
+    #     mlist4.append(i)
+    #
+    # mlist4.del_i(1)
+    # mlist4.printall()
+    #
+    # print('')
+    # mlist4.insert(100, 9)
+    # mlist4.printall()

@@ -1,4 +1,3 @@
-# 表的应用
 # Josephus问题：n个人，从第k个人开始数，数到第m个出局（包括第k个人），空位跳过
 
 
@@ -26,7 +25,7 @@ def josephus(n, k, m):
 # 基于顺序表，复杂度 n2
 def josephus_L(n, k, m):
     people = list(range(1, n + 1))
-    i = k -1
+    i = k - 1
 
     for num in range(n, 0, -1):
         i = (i + m - 1) % num
