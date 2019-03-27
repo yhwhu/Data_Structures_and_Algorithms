@@ -253,8 +253,6 @@ class LList1(LList):
             q.next = p
 
 
-
-
 if __name__ == "__main__":
     # mlist1 = LList()
     # for i in range(10):
