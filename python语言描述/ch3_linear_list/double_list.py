@@ -58,7 +58,7 @@ class DDList(LList1):
         p = self._head       # 赋值相当于指向同一块内存，后续变更会影响
         q = self._rear
 
-        while p is not q:
+        while p is not q and p is not q.next:
             p.elem, q.elem = q.elem, p.elem
             p = p.next
             q = q.prev
@@ -66,14 +66,15 @@ class DDList(LList1):
 
 if __name__ == "__main__":
     mlist4 = DDList()
-    for i in range(10):
+    for i in range(5):
         mlist4.prepend(i)
-    for i in range(11, 20):
+    for i in range(15, 20):
         mlist4.append(i)
     mlist4.printall()
     print("pop:", mlist4.pop())
     print("pop last:", mlist4.pop_last())
 
+    print('reverse')
     mlist4.reverse()
     mlist4.printall()
 

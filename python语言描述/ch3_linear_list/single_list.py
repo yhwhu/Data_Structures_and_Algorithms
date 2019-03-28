@@ -157,6 +157,49 @@ class LList:
             p.next = p.next.next
         return
 
+    # 插入排序
+    # 移动表中元素
+    def sort1(self):
+        if self._head is None:
+            return
+        crt = self._head.next
+        while crt is not None:
+            x = crt.elem
+            p = self._head
+            while p is not crt and p.elem <= x:
+                p = p.next
+
+            while p is not crt:
+                y = p.elem
+                p.elem = x       # 存入前一个结点的数据
+                x = y
+                p = p.next
+            crt.elem = x
+            crt = crt.next
+
+    # 改变结点连接关系
+    def sort2(self):
+        if self._head is None:
+            return
+
+        crt = self._head.next
+        self._head.next = None       # TODO  没看懂
+        while crt is not None:
+            x = crt.elem
+            p = self._head
+            q = None
+            while p is not None and p.elem <= x:
+                q = p
+                p = p.next
+
+            if q is None:
+                self._head = crt
+            else:
+                q.next = crt
+            q = crt
+            crt = crt.next
+            q.next = p
+
 
 # 单链表的简单变动，增加一个尾结点,继承所有的非变动操作
 class LList1(LList):
@@ -209,49 +252,6 @@ class LList1(LList):
             p = q
         self._head = p
 
-    # 插入排序
-    # 移动表中元素
-    def sort1(self):
-        if self._head is None:
-            return
-        crt = self._head.next
-        while crt is not None:
-            x = crt.elem
-            p = self._head
-            while p is not crt and p.elem <= x:
-                p = p.next
-
-            while p is not crt:
-                y = p.elem
-                p.elem = x       # 存入前一个结点的数据
-                x = y
-                p = p.next
-            crt.elem = x
-            crt = crt.next
-
-    # 改变结点连接关系
-    def sort2(self):
-        if self._head is None:
-            return
-
-        crt = self._head.next
-        self._head.next = None       # TODO  没看懂
-        while crt is not None:
-            x = crt.elem
-            p = self._head
-            q = None
-            while p is not None and p.elem <= x:
-                q = p
-                p = p.next
-
-            if q is None:
-                self._head = crt
-            else:
-                q.next = crt
-            q = crt
-            crt = crt.next
-            q.next = p
-
 
 if __name__ == "__main__":
     # mlist1 = LList()
@@ -287,16 +287,16 @@ if __name__ == "__main__":
     print("reverse:")
     mlist3.printall()
     #
-    # mlist3.sort2()
-    # print("")
-    # print('sort2')
-    # mlist3.printall()
-    #
-    # mlist3.reverse()
-    # mlist3.sort1()
-    # print("")
-    # print("sort1")
-    # mlist3.printall()
+    mlist3.sort2()
+    print("")
+    print('sort2')
+    mlist3.printall()
+
+    mlist3.reverse()
+    mlist3.sort1()
+    print("")
+    print("sort1")
+    mlist3.printall()
 
     # mlist4 = LList()
     # for i in range(10):

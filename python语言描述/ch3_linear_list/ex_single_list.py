@@ -35,7 +35,7 @@ class LListEx(LList):
         if p.next is None:
             self._head = None
 
-        q = self._head
+        q = None
         minnum = q.elem
         while p.next is not None:
             if p.next.elem < minnum:
@@ -43,7 +43,7 @@ class LListEx(LList):
                 q = p
             p = p.next
 
-        if q is self._head:      # 恰好第一个数据最小
+        if q is None:      # 恰好第一个数据最小
             self._head = self._head.next
         else:
             q.next = q.next.next
@@ -93,6 +93,35 @@ def partition(lst, pred):
     return res1, res2
 
 
+class LListSort(LList):
+    def __init__(self):
+        LList.__init__(self)
+
+    def sort(self):
+        q = self._head
+
+        while q is not None:
+            p = self._head
+            while p is not q and p.elem <= q.elem:
+                p = p.next
+
+            value = q.elem
+            while p is not q:
+                k = p.elem
+                p.elem = value
+                value = k
+                p = p.next
+            q.elem = value
+            q = q.next
+
+    def merge(self, another):
+        p = another._head
+        while p is not None:
+            self.append(p.elem)
+            p = p.next
+        self.sort()
+
+
 if __name__ == "__main__":
 
     # mlist = LListEx()
@@ -132,13 +161,27 @@ if __name__ == "__main__":
     # mlist3.interleaving(mlist4)
     # mlist3.printall()
 
-    mlist5 = LListEx()
-    for i in range(10):
-        mlist5.prepend(i)
-    # mlist5.printall()
+    # mlist5 = LListEx()
+    # for i in range(10):
+    #     mlist5.prepend(i)
+    # # mlist5.printall()
+    #
+    # res1, res2 = partition(lst=mlist5, pred=lambda x: x % 3 == 0)
+    # print('res1')
+    # res1.printall()
+    # print('res2')
+    # res2.printall()
 
-    res1, res2 = partition(lst=mlist5, pred=lambda x: x % 3 == 0)
-    print('res1')
-    res1.printall()
-    print('res2')
-    res2.printall()
+    mlist6 = LListSort()
+    for i in range(8):
+        mlist6.prepend(i)
+    mlist6.sort()
+    mlist6.printall()
+
+    mlist7 = LListSort()
+    for i in range(8):
+        mlist7.append(i**2 - 10)
+    mlist7.printall()
+    mlist6.merge(mlist7)
+    print('merge')
+    mlist6.printall()

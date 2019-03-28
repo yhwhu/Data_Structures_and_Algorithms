@@ -86,13 +86,69 @@ class LCList2(LCList):
             q.next = p.next
             p.next = q
 
+    def rev_visit(self, pred):
+        self.reverse()
+        p = self._rear.next
+        while True:
+            if p is self._rear:
+                break
+            p.elem = pred(p.elem)
+            p = p.next
+
+        self.printall()
+        self.reverse()
+
+    def del_minimal(self):
+        p = self._rear.next
+        q = None
+        minnum = p.elem
+        while True:
+            if p is self._rear:
+                break
+            if p.next.elem < minnum:
+                minnum = p.next.elem
+                q = p
+            p = p.next
+
+        if q is None:                             # 最小数是第一个
+            self._rear.next = self._rear.next.next
+        elif q.next is self._rear:                # 最小数是最后一个
+            q.next = q.next.next
+            self._rear = q
+        else:
+            q.next = q.next.next
+
+    def del_duplicate(self):
+
+        p = self._rear.next
+        dataset = {p.elem}
+
+        while True:
+            # print('elem', p.next.elem)
+            if p.next.elem in dataset:
+                p.next = p.next.next
+            else:
+                dataset.add(p.next.elem)
+                p = p.next
+            if p.next is self._rear.next:
+                break
+        self._rear = p
 
 
+def partition(lst, pred):
+    res1 = LCList2()
+    res2 = LCList2()
 
-
-
-
-
+    p = lst._rear.next
+    while True:
+        if pred(p.elem):
+            res1.append(p.elem)
+        else:
+            res2.append(p.elem)
+        p = p.next
+        if p is lst._rear.next:
+            break
+    return res1, res2
 
 
 if __name__ == "__main__":
@@ -118,16 +174,38 @@ if __name__ == "__main__":
     # mlist2.sort()
     # mlist2.printall()
 
-    mlist3 = LCList2()
-    mlist4 = LCList2()
-    for i in range(3):
-        mlist3.append(2*i)
-        mlist3.append(30)
-        mlist4.append(2*i+1)
-        # mlist4.append(30)
-    mlist3.printall()
-    mlist3.interleaving(mlist4)
-    print('interleaving')
-    mlist3.printall()
+    # mlist3 = LCList2()
+    # mlist4 = LCList2()
+    # for i in range(3):
+    #     mlist3.append(2*i)
+    #     mlist3.append(30)
+    #     mlist4.append(2*i+1)
+    #     # mlist4.append(30)
+    # mlist3.printall()
+    # mlist3.interleaving(mlist4)
+    # print('interleaving')
+    # mlist3.printall()
     # print(mlist3._rear.next.elem)
 
+    # mlist5 = LCList2()
+    # for i in range(10):
+    #     mlist5.append(i)
+    # mlist5.rev_visit(lambda x: x * 100)
+    # print('rev visit')
+    # mlist5.printall()
+    #
+    # mlist5.del_minimal()
+    # print('del minimal')
+    # mlist5.printall()
+
+    mlist6 = LCList2()
+    for i in [1, 2 , 3]*4 + [4, 5, 6]*8:
+        mlist6.append(i)
+    mlist6.del_duplicate()
+    mlist6.printall()
+
+    res1, res2 = partition(lst=mlist6, pred=lambda x: x%2 == 0)
+    print('res1')
+    res1.printall()
+    print('res2')
+    res2.printall()
